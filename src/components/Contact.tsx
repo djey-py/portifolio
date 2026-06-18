@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Send, Mail, MapPin, Phone, Code, User, Camera } from 'lucide-react';
+import { FaWhatsapp, FaInstagram, FaTiktok } from "react-icons/fa";
 
 const Contact = () => {
   return (
@@ -25,7 +26,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500 uppercase tracking-widest">Email</p>
-                <p className="text-lg font-medium">joelson.pedro@email.com</p>
+                <p className="text-lg font-medium">gphynton@gmail.com</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -34,7 +35,7 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500 uppercase tracking-widest">Localização</p>
-                <p className="text-lg font-medium">Luanda, Angola</p>
+                <p className="text-lg font-medium">Luanda, Angola (Trabalhado para o mundo todo)</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -43,20 +44,40 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500 uppercase tracking-widest">Telefone</p>
-                <p className="text-lg font-medium">+244 9XX XXX XXX</p>
+                <p className="text-lg font-medium">+244 938 435 630</p>
               </div>
             </div>
           </div>
 
           <div className="mt-12 flex gap-6">
-            <a href="#" className="p-3 bg-white/5 rounded-full hover:bg-neon-blue/20 hover:text-neon-blue transition-all">
-              <Code size={24} />
+            {/* WhatsApp */}
+            <a
+              href="https://wa.me/244938435630"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-white/5 rounded-full hover:bg-green-500/20 hover:text-green-500 transition-all"
+            >
+              <FaWhatsapp size={24} />
             </a>
-            <a href="#" className="p-3 bg-white/5 rounded-full hover:bg-neon-blue/20 hover:text-neon-blue transition-all">
-              <User size={24} />
+
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/djey___py/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-white/5 rounded-full hover:bg-pink-500/20 hover:text-pink-500 transition-all"
+            >
+              <FaInstagram size={24} />
             </a>
-            <a href="#" className="p-3 bg-white/5 rounded-full hover:bg-neon-blue/20 hover:text-neon-blue transition-all">
-              <Camera size={24} />
+
+            {/* TikTok */}
+            <a
+              href="https://www.tiktok.com/@_djey_py?is_from_webapp=1&sender_device=pc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-white/5 rounded-full hover:bg-cyan-400/20 hover:text-cyan-400 transition-all"
+            >
+              <FaTiktok size={24} />
             </a>
           </div>
         </div>
@@ -102,7 +123,7 @@ const Contact = () => {
                 placeholder="Sua mensagem..."
               />
             </div>
-            <button className="w-full py-4 bg-gradient-to-r from-neon-blue to-neon-purple rounded-xl font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+            <button className="w-full py-4 bg-gradient-to-r from-neon-black to-neon-purple rounded-xl font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
               <Send size={20} />
               Enviar Mensagem
             </button>

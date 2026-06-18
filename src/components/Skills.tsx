@@ -1,77 +1,173 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import {
+  FaPhp,
+  FaReact,
+  FaJs,
+  FaHtml5,
+  FaCss3Alt,
+  FaBootstrap,
+} from "react-icons/fa";
+import { MdMemory } from "react-icons/md";
 
 const skills = [
-  { name: 'PHP', level: 90, color: '#4F5D95' },
-  { name: 'React.js', level: 95, color: '#61DAFB' },
-  { name: 'JavaScript', level: 92, color: '#F7DF1E' },
-  { name: 'HTML5', level: 98, color: '#E34F26' },
-  { name: 'CSS3', level: 95, color: '#1572B6' },
-  { name: 'Bootstrap', level: 85, color: '#7952B3' },
-  { name: 'Hardware', level: 88, color: '#ffffff' },
+  { name: "PHP", level: 90, color: "#4F5D95", icon: <FaPhp /> },
+  { name: "React.js", level: 95, color: "#61DAFB", icon: <FaReact /> },
+  { name: "JavaScript", level: 92, color: "#F7DF1E", icon: <FaJs /> },
+  { name: "HTML5", level: 98, color: "#E34F26", icon: <FaHtml5 /> },
+  { name: "CSS3", level: 95, color: "#1572B6", icon: <FaCss3Alt /> },
+  { name: "Bootstrap", level: 85, color: "#7952B3", icon: <FaBootstrap /> },
+  { name: "Hardware", level: 88, color: "#ffffff", icon: <MdMemory /> },
 ];
 
-const Skills = () => {
-  return (
-    <section id="skills" className="py-20 px-6 max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row gap-16">
-        <div className="md:w-1/3">
-          <motion.h2
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold mb-6"
-          >
-            Core <br />
-            <span className="text-neon-blue">Technology</span> <br />
-            Stack
-          </motion.h2>
-          <p className="text-gray-400 mb-8">
-            Minhas habilidades técnicas abrangem desde o desenvolvimento web moderno até a engenharia de hardware, permitindo uma visão holística de cada projeto.
-          </p>
-          <div className="p-6 border border-white/10 rounded-xl glass-morphism">
-            <h4 className="font-bold text-neon-purple mb-2">Técnico de Hardware</h4>
-            <p className="text-sm text-gray-500">
-              Especializado em diagnóstico e reparo de dispositivos móveis e computadores de mesa, unindo o mundo físico ao digital.
-            </p>
-          </div>
-        </div>
+const values = ["Inovação", "Escalabilidade", "Performance", "UX/UI"];
 
-        <div className="md:w-2/3 grid grid-cols-1 gap-6">
-          {skills.map((skill, index) => (
-            <div key={index} className="relative">
-              <div className="flex justify-between mb-2">
-                <span className="font-bold tracking-widest">{skill.name}</span>
-                <span className="text-gray-500">{skill.level}%</span>
+const Skills = () => {
+  const radius = 70;
+  const stroke = 10;
+  const normalizedRadius = radius - stroke * 2;
+  const circumference = normalizedRadius * 2 * Math.PI;
+
+  return (
+    <section id="skills" className="py-28 px-6 max-w-7xl mx-auto text-center">
+      
+      {/* TITLE */}
+      <motion.h2
+        initial={{ opacity: 0, y: -30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-5xl md:text-6xl font-bold mb-12"
+      >
+        Core{" "}
+        <span className="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
+          Technology
+        </span>{" "}
+        Stack
+      </motion.h2>
+
+      {/* DESCRIPTION */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        viewport={{ once: true }}
+        className="text-gray-400 max-w-3xl mx-auto mb-10 text-lg leading-relaxed"
+      >
+        Minhas habilidades técnicas abrangem desde o desenvolvimento web moderno até a engenharia de hardware, permitindo uma visão holística de cada projeto.
+      </motion.p>
+
+      {/* HARDWARE CARD */}
+      {/* <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3 }}
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.03 }}
+        className="max-w-xl mx-auto p-8 mb-20 rounded-2xl 
+        bg-gradient-to-br from-white/5 to-white/10
+        border border-white/10
+        backdrop-blur-xl
+        hover:border-neon-purple/40
+        transition-all duration-500"
+      >
+        <h4 className="font-bold text-neon-purple mb-3 text-lg">
+          Técnico de Hardware
+        </h4>
+        <p className="text-sm text-gray-500 leading-relaxed">
+          Especializado em diagnóstico e reparo de dispositivos móveis e computadores de mesa, unindo o mundo físico ao digital.
+        </p>
+      </motion.div> */}
+
+      {/* CIRCULAR SKILLS */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-16 justify-items-center">
+        {skills.map((skill, index) => {
+          const strokeDashoffset =
+            circumference - (skill.level / 100) * circumference;
+
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.7 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.08 }}
+              className="flex flex-col items-center"
+            >
+              <div className="relative w-40 h-40 flex items-center justify-center">
+                <svg height={radius * 2} width={radius * 2}>
+                  <circle
+                    stroke="rgba(255,255,255,0.1)"
+                    fill="transparent"
+                    strokeWidth={stroke}
+                    r={normalizedRadius}
+                    cx={radius}
+                    cy={radius}
+                  />
+
+                  <motion.circle
+                    stroke={skill.color}
+                    fill="transparent"
+                    strokeWidth={stroke}
+                    strokeLinecap="round"
+                    strokeDasharray={circumference}
+                    initial={{ strokeDashoffset: circumference }}
+                    whileInView={{ strokeDashoffset }}
+                    transition={{ duration: 1.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    style={{
+                      filter: `drop-shadow(0 0 8px ${skill.color})`,
+                    }}
+                    r={normalizedRadius}
+                    cx={radius}
+                    cy={radius}
+                    transform={`rotate(-90 ${radius} ${radius})`}
+                  />
+                </svg>
+
+                <div className="absolute flex flex-col items-center">
+                  <div
+                    className="text-3xl mb-1"
+                    style={{ color: skill.color }}
+                  >
+                    {skill.icon}
+                  </div>
+                  <span
+                    className="text-sm font-mono"
+                    style={{ color: skill.color }}
+                  >
+                    {skill.level}%
+                  </span>
+                </div>
               </div>
-              <div className="h-2 bg-white/5 rounded-full overflow-hidden border border-white/5">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="h-full rounded-full"
-                  style={{
-                    backgroundColor: skill.color,
-                    boxShadow: `0 0 10px ${skill.color}88`
-                  }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
+
+              <span className="mt-4 font-bold tracking-widest">
+                {skill.name}
+              </span>
+            </motion.div>
+          );
+        })}
       </div>
 
-      <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-        {['Inovação', 'Escalabilidade', 'Performance', 'UX/UI'].map((item, i) => (
+      {/* VALUES SECTION */}
+      <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-10">
+        {values.map((item, i) => (
           <motion.div
             key={item}
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.15 }}
             viewport={{ once: true }}
-            className="text-center p-4 border border-white/5 rounded-lg hover:border-neon-blue/30 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            className="relative p-8 rounded-2xl 
+            border border-white/10 
+            bg-gradient-to-br from-white/5 to-white/10 
+            backdrop-blur-xl 
+            hover:border-neon-blue/40
+            transition-all duration-500"
           >
-            <span className="text-gray-500 font-mono text-sm uppercase tracking-tighter block mb-2">0{i + 1}</span>
+            <span className="absolute top-4 right-6 text-xs font-mono text-gray-600">
+              0{i + 1}
+            </span>
             <span className="text-xl font-bold">{item}</span>
           </motion.div>
         ))}

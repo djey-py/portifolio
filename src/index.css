@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neon-blue: #00f2ff;
-  --color-neon-purple: #bc13fe;
-  --color-bg-dark: #050505;
+  --color-neon-blue: #efefef;
+  --color-neon-purple: #fff;
+  --color-neon-black: #000;
 }
 
 :root {
   --neon-blue: #00f2ff;
-  --neon-purple: #bc13fe;
+  --neon-purple: #207924;
   --bg-dark: #050505;
 }
 

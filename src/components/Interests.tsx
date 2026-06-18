@@ -1,73 +1,104 @@
-import { motion } from 'framer-motion';
-import { Gamepad2, Trophy, BookOpen, Smartphone } from 'lucide-react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Gamepad2, Trophy, BookOpen, Smartphone } from "lucide-react";
+import Jetris from "./Jetris";
 
 const Interests = () => {
+  const [active, setActive] = useState<number | null>(null);
+  const [score, setScore] = useState(0);
+
   const items = [
     {
       icon: <Gamepad2 size={40} className="text-neon-blue" />,
       title: "Gamer at Heart",
-      desc: "Apaixonado por universos virtuais, estratégia e competição. O gaming moldou minha resolução de problemas.",
-      color: "border-neon-blue/20"
+      content: <Jetris />,
     },
     {
       icon: <Trophy size={40} className="text-yellow-500" />,
       title: "Madridista",
-      desc: "Hala Madrid! O espírito de luta e a busca pela excelência do Real Madrid me inspiram diariamente.",
-      color: "border-yellow-500/20"
+      content: (
+        <div className="text-center">
+          <h3 className="text-4xl font-black text-yellow-500 mb-4">
+            HALA MADRID ⚽
+          </h3>
+          <p className="text-gray-400">
+            14x Champions League 🏆 <br />
+            Espírito, História e Glória.
+          </p>
+        </div>
+      ),
     },
     {
       icon: <BookOpen size={40} className="text-neon-purple" />,
       title: "Dostoevsky Reader",
-      desc: "A profundidade psicológica de Fyodor Dostoevsky é minha fonte de inspiração para complexidade e verdade.",
-      color: "border-neon-purple/20"
+      content: (
+        <ul className="text-left space-y-3 text-gray-400">
+          <li>• Crime e Castigo</li>
+          <li>• Os Irmãos Karamázov</li>
+          <li>• O Idiota</li>
+          <li>• Memórias do Subsolo</li>
+        </ul>
+      ),
     },
     {
       icon: <Smartphone size={40} className="text-green-500" />,
       title: "Mobile Tech",
-      desc: "Sempre de olho no último gadget ou inovação mobile. A tecnologia no bolso é o futuro.",
-      color: "border-green-500/20"
-    }
+      content: (
+        <div className="text-left text-gray-400 space-y-3">
+          <p>📱 iPhone revolucionou o mercado mobile</p>
+          <p>🤖 Android democratizou smartphones</p>
+          <p>🌍 5G transformando conectividade</p>
+          <p>🧠 IA integrada em dispositivos móveis</p>
+        </div>
+      ),
+    },
   ];
 
   return (
-    <section id="interests" className="py-20 px-6 max-w-7xl mx-auto overflow-hidden">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-black uppercase tracking-tighter glow-text italic">
-          Life & <span className="text-neon-blue">Passion</span>
-        </h2>
-      </div>
+    <section className="py-32 px-6 max-w-6xl mx-auto">
+      <h2 className="text-5xl font-bold text-center mb-20">
+        Life &{" "}
+        <span className="bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
+          Passion
+        </span>
+      </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="space-y-8">
         {items.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, type: "spring" }}
-            viewport={{ once: true }}
-            className={`flex items-start gap-6 p-8 glass-morphism rounded-3xl border ${item.color} relative group`}
-          >
-            <div className="p-4 bg-white/5 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+          <div key={index}>
+            
+            {/* CLICKABLE CARD */}
+            <motion.div
+              onClick={() => setActive(active === index ? null : index)}
+              whileHover={{ scale: 1.02 }}
+              className="cursor-pointer p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl flex items-center gap-6"
+            >
               {item.icon}
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{item.desc}</p>
-            </div>
-            <div className="absolute top-0 right-0 p-4 text-white/5 font-black text-6xl select-none">
-              {index + 1}
-            </div>
-          </motion.div>
+              <h3 className="text-2xl font-bold">{item.title}</h3>
+            </motion.div>
+
+            {/* EXPANDABLE CONTENT */}
+            <AnimatePresence>
+              {active === index && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="overflow-hidden bg-black/40 border border-white/10 rounded-2xl p-8 mt-4"
+                >
+                  {item.content}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+          </div>
         ))}
       </div>
-      
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        className="mt-20 flex justify-center italic text-gray-500 text-center max-w-2xl mx-auto px-4"
-      >
-        <p>"A beleza salvará o mundo." — Fyodor Dostoevsky</p>
-      </motion.div>
+
+      <div className="mt-20 text-center italic text-gray-500">
+        "A beleza salvará o mundo." — Fyodor Dostoevsky
+      </div>
     </section>
   );
 };
